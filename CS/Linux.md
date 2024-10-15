@@ -279,7 +279,38 @@
 ## 2. shell
 
 1. Shell 脚本是什么
+    - 1个 Shell 脚本是一个文本文件，包含一个或多个命令。作为系统管理员，我们经常需要使用多个命令来完成一项任务，我们可以添加这些所有命令在一个文本文件(Shell 脚本)来完成这些日常工作任务。
+    - 什么是默认登录 Shell ？
+    - 在 Linux 操作系统，"/bin/bash" 是默认登录 Shell，是在创建用户时分配的。
+
 2. 可以在 Shell 脚本中使用哪些类型的变量？
+    在 Shell 脚本，我们可以使用两种类型的变量：
+    - 系统定义变量
+
+        系统变量是由系统系统自己创建的。这些变量通常由大写字母组成，可以通过 set 命令查看。
+    - 用户定义变量
+
+        用户变量由系统用户来生成和定义，变量的值可以通过命令 `echo $<变量名>` 查看。
+
+    在写一个 Shell 脚本时，如果你想要检查前一命令是否执行成功，在 if 条件中使用 `$?` 可以来检查前一命令的结束状态。
+    - 如果结束状态是 0 ，说明前一个命令执行成功。例如：
+
+            ```bash
+            root@localhost:~## ls /usr/bin/shar
+            /usr/bin/shar
+            root@localhost:~## echo $?
+            0
+            ```
+
+    - 如果结束状态不是0，说明命令执行失败。例如：
+
+            ```bash
+            root@localhost:~## ls /usr/bin/share
+            ls: cannot access /usr/bin/share: No such file or directory
+            root@localhost:~## echo $?
+            2
+            ```
+
 3. Shell 脚本中 if 语法如何嵌套?
 4. Shell 脚本中 case 语句的语法?
 5. Shell 脚本中 for 循环语法？
