@@ -312,6 +312,47 @@
             ```
 
 3. Shell 脚本中 if 语法如何嵌套?
+    - if 语法
+
+            ```shell
+
+            if [ 条件 ]
+            then
+            命令1
+            命令2
+            …..
+            else
+            if [ 条件 ]
+            then
+            命令1
+            命令2
+            ….
+            else
+            命令1
+            命令2
+            …..
+            fi
+            fi
+
+            ```
+
+    - 在 Shell 脚本中如何比较两个数字？
+        在 if-then 中使用测试命令（ -gt 等）来比较两个数字。例如：
+
+            ```shell
+
+            #!/bin/bash
+            x=10
+            y=20
+            if [ $x -gt $y ]
+            then
+            echo “x is greater than y”
+            else
+            echo “y is greater than x”
+            fi
+
+            ```
+
 4. Shell 脚本中 case 语句的语法?
 5. Shell 脚本中 for 循环语法？
 6. Shell 脚本中 while 循环语法？
