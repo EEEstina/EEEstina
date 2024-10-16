@@ -445,6 +445,14 @@
 ## 3. 文件管理命令
 
 1. cat 命令
+    - cat 简介
+    1. 一次显示整个文件:
+        `cat filename`
+    2. 从键盘创建一个文件:
+        `cat > filename`
+    3. 将几个文件合并为一个文件:
+        `cat file1 file2 > file`
+
 2. chmod 命令
 3. chown 命令
 4. cp 命令
