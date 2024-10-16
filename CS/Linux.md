@@ -614,17 +614,52 @@
 ## 8. 备份压缩命令
 
 1. bzip2 命令
-
-    创建 *.bz2 压缩文件：`bzip2 test.txt`
-
-    解压 *.bz2 文件：`bzip2 -d test.txt.bz2`
+    - 创建 *.bz2 压缩文件：`bzip2 test.txt`
+    - 解压 *.bz2 文件：`bzip2 -d test.txt.bz2`
 
 2. gzip 命令
+    - 创建一个 *.gz 的压缩文件：gzip test.txt 。
+    - 解压 *.gz 文件：gzip -d test.txt.gz 。
+    - 显示压缩的比率：gzip -l *.gz 。
 
 3. tar 命令
+    - tar 命令
+        - 用来压缩和解压文件。tar 本身不具有压缩功能，只具有打包功能，有关压缩及解压是调用其它的功能来完成。
+        - 弄清两个概念：打包和压缩。
+        - 打包是指将一大堆文件或目录变成一个总的文件；
+        - 压缩则是将一个大的文件通过一些压缩算法变成一个小文件
+    - 常用参数：
+        -c 建立新的压缩文件
+        -f 指定压缩文件
+        -r 添加文件到已经压缩文件包中
+        -u 添加改了和现有的文件到压缩包中
+        -x 从压缩包中抽取文件
+        -t 显示压缩文件中的内容
+        -z 支持gzip压缩
+        -j 支持bzip2压缩
+        -Z 支持compress解压文件
+        -v 显示操作过程
+    - 有关 gzip 及 bzip2 压缩:
+    - gzip 实例：
+        - 压缩 gzip fileName .tar.gz 和.tgz
+        - 解压：gunzip filename.gz 或 gzip -d filename.gz 对应：
+        - tar zcvf filename.tar.gz
+        - tar zxvf filename.tar.gz
+    - bz2实例：
+        - 压缩 bzip2 -z filename .tar.bz2
+        - 解压：bunzip filename.bz2或bzip -d filename.bz2 对应：
+        - tar jcvf filename.tar.gz
+        - tar jxvf filename.tar.bz2
+    - 实例：
+        1. 将文件全部打包成 tar 包
+            `tar -cvf log.tar 1.log,2.log 或tar -cvf log.*`
+        2. 将 /etc 下的所有文件及目录打包到指定目录，并使用 gz 压缩
+            `tar -zcvf /tmp/etc.tar.gz /etc`
+        3. 查看刚打包的文件内容（一定加z，因为是使用 gzip 压缩的）
+            `tar -ztvf /tmp/etc.tar.gz`
+        4. 要压缩打包 /home, /etc ，但不要 /home/dmtsai
+            `tar --exclude /home/dmtsai -zcvf myfile.tar.gz /home/* /etc`
 
 4. unzip 命令
-
-    解压 *.zip 文件：`unzip *.zip`
-
-    查看 *.zip 文件的内容：`unzip -l *.zip`
+    - 解压 *.zip 文件：`unzip *.zip`
+    - 查看 *.zip 文件的内容：`unzip -l *.zip`
