@@ -940,10 +940,116 @@
 ## 6. 网络通讯命令
 
 1. ifconfig 命令
+    - ifconfig 用于查看和配置 Linux 系统的网络接口。
+    - 查看所有网络接口及其状态：ifconfig -a 。
+    - 使用 up 和 down 命令启动或停止某个接口：ifconfig eth0 up 和 ifconfig eth0 down 。
+
 2. iptables 命令
+    - iptables ，是一个配置 Linux 内核防火墙的命令行工具。功能非常强大，对于我们开发来说，主要掌握如何开放端口即可。例如：
+    - 把来源 IP 为 192.168.1.101 访问本机 80 端口的包直接拒绝：iptables -I INPUT -s 192.168.1.101 -p tcp --dport 80 -j REJECT 。
+    - 开启 80 端口，因为web对外都是这个端口
+        `iptables -A INPUT -p tcp --dport 80 -j ACCEP`
+    - 另外，要注意使用 iptables save 命令，进行保存。否则，服务器重启后，配置的规则将丢失。
+
 3. netstat 命令
+    - Linux netstat命令用于显示网络状态。
+    - 利用netstat指令可让你得知整个Linux系统的网络情况。
+    - 语法
+        `netstat [-acCeFghilMnNoprstuvVwx][-A<网络类型>][--ip]`
+    - 参数说明：
+        -a或–all 显示所有连线中的Socket。
+        -A<网络类型>或–<网络类型> 列出该网络类型连线中的相关地址。
+        -c或–continuous 持续列出网络状态。
+        -C或–cache 显示路由器配置的快取信息。
+        -e或–extend 显示网络其他相关信息。
+        -F或–fib 显示FIB。
+        -g或–groups 显示多重广播功能群组组员名单。
+        -h或–help 在线帮助。
+        -i或–interfaces 显示网络界面信息表单。
+        -l或–listening 显示监控中的服务器的Socket。
+        -M或–masquerade 显示伪装的网络连线。
+        -n或–numeric 直接使用IP地址，而不通过域名服务器。
+        -N或–netlink或–symbolic 显示网络硬件外围设备的符号连接名称。
+        -o或–timers 显示计时器。
+        -p或–programs 显示正在使用Socket的程序识别码和程序名称。
+        -r或–route 显示Routing Table。
+        -s或–statistice 显示网络工作信息统计表。
+        -t或–tcp 显示TCP传输协议的连线状况。
+        -u或–udp 显示UDP传输协议的连线状况。
+        -v或–verbose 显示指令执行过程。
+        -V或–version 显示版本信息。
+        -w或–raw 显示RAW传输协议的连线状况。
+        -x或–unix 此参数的效果和指定"-A unix"参数相同。
+        –ip或–inet 此参数的效果和指定"-A inet"参数相同。
+    - 实例
+        - 如何查看系统都开启了哪些端口？
+                ```bash
+
+                [root@centos6 ~ 13:20 #55]# netstat -lnp
+                Active Internet connections (only servers)
+                Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID/Program name
+                tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN      1035/sshd
+                tcp        0      0 :::22                       :::*                        LISTEN      1035/sshd
+                udp        0      0 0.0.0.0:68                  0.0.0.0:*                               931/dhclient
+                Active UNIX domain sockets (only servers)
+                Proto RefCnt Flags       Type       State         I-Node PID/Program name    Path
+                unix  2      [ ACC ]     STREAM     LISTENING     6825   1/init              @/com/ubuntu/upstart
+                unix  2      [ ACC ]     STREAM     LISTENING     8429   1003/dbus-daemon    /var/run/dbus/system_bus_socket
+
+                ```
+
+        - 如何查看网络连接状况？
+                ```bash
+
+                [root@centos6 ~ 13:22 #58]# netstat -an
+                Active Internet connections (servers and established)
+                Proto Recv-Q Send-Q Local Address               Foreign Address             State
+                tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN
+                tcp        0      0 192.168.147.130:22          192.168.147.1:23893         ESTABLISHED
+                tcp        0      0 :::22                       :::*                        LISTEN
+                udp        0      0 0.0.0.0:68                  0.0.0.0:*
+
+                ```
+
+        - 如何统计系统当前进程连接数？
+            输入命令 netstat -an | grep ESTABLISHED | wc -l 。
+
+            输出结果 177 。一共有 177 连接数。
+
 4. ping 命令
+    - Linux ping命令用于检测主机。
+    - 执行ping指令会使用ICMP传输协议，发出要求回应的信息，若远端主机的网络功能没有问题，就会回应该信息，因而得知该主机运作正常。
+    - 指定接收包的次数
+        `ping -c 2 www.baidu.com`
+
 5. telnet 命令
+    - Linux telnet命令用于远端登入。
+    - 执行telnet指令开启终端机阶段作业，并登入远端主机。
+    - 语法
+        `telnet [-8acdEfFKLrx][-b<主机别名>][-e<脱离字符>][-k<域名>][-l<用户名称>][-n<记录文件>][-S<服务类型>][-X<认证形态>][主机名称或IP地址<通信端口>]`
+    - 参数说明：
+        -8 允许使用8位字符资料，包括输入与输出。
+        -a 尝试自动登入远端系统。
+        -b<主机别名> 使用别名指定远端主机名称。
+        -c 不读取用户专属目录里的.telnetrc文件。
+        -d 启动排错模式。
+        -e<脱离字符> 设置脱离字符。
+        -E 滤除脱离字符。
+        -f 此参数的效果和指定"-F"参数相同。
+        -F 使用Kerberos V5认证时，加上此参数可把本地主机的认证数据上传到远端主机。
+        -k<域名> 使用Kerberos认证时，加上此参数让远端主机采用指定的领域名，而非该主机的域名。
+        -K 不自动登入远端主机。
+        -l<用户名称> 指定要登入远端主机的用户名称。
+        -L 允许输出8位字符资料。
+        -n<记录文件> 指定文件记录相关信息。
+        -r 使用类似rlogin指令的用户界面。
+        -S<服务类型> 设置telnet连线所需的IP TOS信息。
+        -x 假设主机有支持数据加密的功能，就使用它。
+        -X<认证形态> 关闭指定的认证形态。
+    - 实例
+        - 登录远程主机
+            `# 登录IP为 192.168.0.5 的远程主机`
+            `telnet 192.168.0.5`
 
 ## 7. 系统管理命令
 
