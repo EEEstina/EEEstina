@@ -1054,12 +1054,203 @@
 ## 7. 系统管理命令
 
 1. date 命令
+    - 显示或设定系统的日期与时间。
+    - 命令参数：
+        -d<字符串>  显示字符串所指的日期与时间。字符串前后必须加上双引号。
+        -s<字符串>  根据字符串来设置日期与时间。字符串前后必须加上双引号。
+        -u  显示GMT。
+        %H 小时(00-23)
+        %I 小时(00-12)
+        %M 分钟(以00-59来表示)
+        %s 总秒数。起算时间为1970-01-01 00:00:00 UTC。
+        %S 秒(以本地的惯用法来表示)
+        %a 星期的缩写。
+        %A 星期的完整名称。
+        %d 日期(以01-31来表示)。
+        %D 日期(含年月日)。
+        %m 月份(以01-12来表示)。
+        %y 年份(以00-99来表示)。
+        %Y 年份(以四位数来表示)。
+    - 实例：
+        1. 显示下一天
+            `date +%Y%m%d --date="+1 day"  //显示下一天的日期`
+        2. -d参数使用
+            `date -d "nov 22"  今年的 11 月 22 日是星期三`
+            `date -d '2 weeks' 2周后的日期`
+            `date -d 'next monday' (下周一的日期)`
+            `date -d next-day +%Y%m%d（明天的日期）`或者：`date -d tomorrow +%Y%m%d`
+            `date -d last-day +%Y%m%d(昨天的日期)` 或者：`date -d yesterday +%Y%m%d`
+            `date -d last-month +%Y%m(上个月是几月)`
+            `date -d next-month +%Y%m(下个月是几月)`
+
 2. free 命令
+    - 显示系统内存使用情况，包括物理内存、交互区内存(swap)和内核缓冲区内存。
+    - 命令参数：
+        -b 以Byte显示内存使用情况
+        -k 以kb为单位显示内存使用情况
+        -m 以mb为单位显示内存使用情况
+        -g 以gb为单位显示内存使用情况
+        -s<间隔秒数> 持续显示内存
+        -t 显示内存使用总合
+    - 实例：
+        1. 显示内存使用情况
+            `free`
+            `free -k`
+            `free -m`
+        2. 以总和的形式显示内存的使用信息
+            `free -t`
+        3. 周期性查询内存使用情况
+            `free -s 10`
+
 3. kill 命令
+    - 如果任无法终止该程序可用"-KILL" 参数，
+    - SIGTERM（15）终止指定进程
+    - SIGKILL(9) 将强制结束进程
+    - root用户将影响用户的进程
+    - 非root用户只能影响自己的进程。
+    - 常用参数：
+        -l  信号，若果不加信号的编号参数，则使用“-l”参数会列出全部的信号名称
+        -a  当处理当前进程时，不限制命令名和进程号的对应关系
+        -p  指定kill 命令只打印相关进程的进程号，而不发送任何信号
+        -s  指定发送信号
+        -u  指定用户
+    - 实例：
+        1. 先使用ps查找进程pro1，然后用kill杀掉
+            `kill -9 $(ps -ef | grep pro1)`
+
 4. ps 命令
+    - ps 查看进程状态
+        - linux上进程有5种状态:
+        - 运行(正在运行或在运行队列中等待)
+        - 中断(休眠中, 受阻, 在等待某个条件的形成或接受到信号)
+        - 不可中断(收到信号不唤醒和不可运行, 进程必须等待直到有中断发生)
+        - 僵死(进程已终止, 但进程描述符存在, 直到父进程调用wait4()系统调用后释放)
+        - 停止(进程收到SIGSTOP, SIGSTP, SIGTIN, SIGTOU信号后停止运行运行)
+    - 5种状态码:
+        D 不可中断 uninterruptible sleep (usually IO)
+        R 运行 runnable (on run queue)
+        S 中断 sleeping
+        T 停止 traced or stopped
+        Z 僵死 a defunct (”zombie”) process
+    - 命令参数：
+        -A 显示所有进程
+        a 显示所有进程
+        -a 显示同一终端下所有进程
+        c 显示进程真实名称
+        e 显示环境变量
+        f 显示进程间的关系
+        r 显示当前终端运行的进程
+        -aux 显示所有包含其它使用的进程
+    - 实例：
+        1. 显示当前所有进程环境变量及进程间关系
+            `ps -ef`
+        2. 显示当前所有进程
+            `ps -A`
+        3. 与grep联用查找某进程
+            `ps -aux | grep apache`
+        4. 找出与 cron 与 syslog 这两个服务有关的 PID 号码
+            `ps aux | grep '(cron|syslog)'`
+
 5. rpm 命令
+    - Linux rpm 命令用于管理套件。
+    - rpm(redhat package manager) 原本是 Red Hat Linux 发行版专门用来管理 Linux 各项套件的程序，由于它遵循 GPL 规则且功能强大方便，因而广受欢迎。逐渐受到其他发行版的采用。RPM 套件管理方式的出现，让 Linux 易于安装，升级，间接提升了 Linux 的适用度。
+    - 查看系统自带jdk
+        `rpm -qa | grep jdk`
+    - 删除系统自带jdk
+        `rpm -e --nodeps` 查看jdk显示的数据
+    - 安装jdk
+        `rpm -ivh jdk-7u80-linux-x64.rpm`
+
 6. top 命令
+    - 显示当前系统正在执行的进程的相关信息，包括进程 ID、内存占用率、CPU 占用率等
+    - 常用参数：
+        -c 显示完整的进程命令
+        -s 保密模式
+        -p <进程号> 指定进程显示
+        -n <次数>循环显示次数
+    - 实例：
+
+            ```bash
+
+            top - 14:06:23 up 70 days, 16:44,  2 users,  load average: 1.25, 1.32, 1.35
+            Tasks: 206 total,   1 running, 205 sleeping,   0 stopped,   0 zombie
+            Cpu(s):  5.9%us,  3.4%sy,  0.0%ni, 90.4%id,  0.0%wa,  0.0%hi,  0.2%si,  0.0%st
+            Mem:  32949016k total, 14411180k used, 18537836k free,   169884k buffers
+            Swap: 32764556k total,        0k used, 32764556k free,  3612636k cached
+            PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND  
+            28894 root      22   0 1501m 405m  10m S 52.2  1.3   2534:16 java  
+
+            ```
+
+    - 前五行是当前系统情况整体的统计信息区。
+    - 第一行，任务队列信息，同 uptime 命令的执行结果，具体参数说明情况如下：
+    - 14:06:23 — 当前系统时间
+    - up 70 days, 16:44 — 系统已经运行了70天16小时44分钟（在这期间系统没有重启过的）
+    - 2 users — 当前有2个用户登录系统
+    - load average: 1.15, 1.42, 1.44 — load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。
+    - load average数据是每隔5秒钟检查一次活跃的进程数，然后按特定算法计算出的数值。如果这个数除以逻辑CPU的数量，结果高于5的时候就表明系统在超负荷运转了。
+    - 第二行，Tasks — 任务（进程），具体信息说明如下：
+    - 系统现在共有206个进程，其中处于运行中的有1个，205个在休眠（sleep），stoped状态的有0个，zombie状态（僵尸）的有0个。
+    - 第三行，cpu状态信息，具体属性说明如下：
+        5.9%us — 用户空间占用CPU的百分比。
+        3.4% sy — 内核空间占用CPU的百分比。
+        0.0% ni — 改变过优先级的进程占用CPU的百分比
+        90.4% id — 空闲CPU百分比
+        0.0% wa — IO等待占用CPU的百分比
+        0.0% hi — 硬中断（Hardware IRQ）占用CPU的百分比
+        0.2% si — 软中断（Software Interrupts）占用CPU的百分比
+    - 备注：在这里CPU的使用比率和windows概念不同，需要理解linux系统用户空间和内核空间的相关知识！
+    - 第四行，内存状态，具体信息如下：
+        32949016k total — 物理内存总量（32GB）
+        14411180k used — 使用中的内存总量（14GB）
+        18537836k free — 空闲内存总量（18GB）
+        169884k buffers — 缓存的内存量 （169M）
+    - 第五行，swap交换分区信息，具体信息说明如下：
+        32764556k total — 交换区总量（32GB）
+        0k used — 使用的交换区总量（0K）
+        32764556k free — 空闲交换区总量（32GB）
+        3612636k cached — 缓冲的交换区总量（3.6GB）
+    - 第六行，空行。
+    - 第七行以下：各进程（任务）的状态监控，项目列信息说明如下：
+        PID — 进程id
+        USER — 进程所有者
+        PR — 进程优先级
+        NI — nice值。负值表示高优先级，正值表示低优先级
+        VIRT — 进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES
+        RES — 进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+        SHR — 共享内存大小，单位kb
+        S — 进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程
+        %CPU — 上次更新到现在的CPU时间占用百分比
+        %MEM — 进程使用的物理内存百分比
+        TIME+ — 进程使用的CPU时间总计，单位1/100秒
+        COMMAND — 进程名称（命令名/命令行）
+    - top 交互命令
+        h 显示top交互命令帮助信息
+        c 切换显示命令名称和完整命令行
+        m 以内存使用率排序
+        P 根据CPU使用百分比大小进行排序
+        T 根据时间/累计时间进行排序
+        W 将当前设置写入~/.toprc文件中
+        o或者O 改变显示项目的顺序
+
 7. yum 命令
+    - yum 前端软件包管理器。
+    - yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。
+        1. 列出所有可更新的软件清单命令：yum check-update
+        2. 更新所有软件命令：yum update
+        3. 仅安装指定的软件命令：yum install <package_name>
+        4. 仅更新指定的软件命令：yum update <package_name>
+        5. 列出所有可安裝的软件清单命令：yum list
+        6. 删除软件包命令：yum remove <package_name>
+        7. 查找软件包 命令：yum search
+        8. 清除缓存命令:
+            `yum clean packages`: 清除缓存目录下的软件包
+            `yum clean headers`: 清除缓存目录下的 headers
+            `yum clean oldheaders`: 清除缓存目录下旧的 headers
+            `yum clean, yum clean all (= yum clean packages; yum clean oldheaders)` :清除缓存目录下的软件包及旧的headers
+    - 实例
+    - 安装 pam-devel
+        `[root@www ~]# yum install pam-devel`
 
 ## 8. 备份压缩命令
 
