@@ -134,25 +134,6 @@
 
 ## TCP 三次握手
 
-Zenfone 10
-Zenbook S13
-
-ROG STRIX G15 => ROG ZEPHYRUS G14 => ROG GAMING CHARGER DOCK
-ROG HARPE ACE => ROG HARPE ACE MINI
-ROG FALCHION RX LOW PROFILE
-
-ROG STRIX Z790-A
-NVIDIA GeForce RTX 4090
-=> Seasonic
-NOCTUA
-    => NOCTUA NF-A12x25 PWM chromax.black.swap
-    => NOCTUA NF-A15 HS-PWM chromax.black.swap x2
-    => NOCTUA NF-A14 PWM chromax.black.swap x
-        => NOCTUA NA-SYC1 chromax.white4
-        => NOCTUA NA-SEC3
--> Fractal Design
-EDIFIER | HKC => EDIFIER | LG
-
 ### 重要字段
 
 - seq(sequence number): 序列号/顺序号；用来表示 TCP 发起端向接收端发送的字节流，发起端发送数据时对此进行标记。（可以理解为发送自己的数据）
