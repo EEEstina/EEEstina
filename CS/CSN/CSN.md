@@ -124,9 +124,9 @@
 
 ### 参考链接
 
-dns域名系统的作用是什么（dns域名解析过程）
+[dns域名系统的作用是什么（dns域名解析过程）](https://www.yangfanhao.com/n/229926.html)
 
-一文彻底搞定DNS面试题
+[一文彻底搞定DNS面试题](https://blog.csdn.net/weixin_43155866/article/details/108237648)
 
 ## 获取 MAC 地址
 
