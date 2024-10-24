@@ -132,7 +132,10 @@
 
 当浏览器得到 IP 地址后，数据传输还需要知道目的主机 MAC 地址，因为应用层下发数据给传输层，TCP 协议会指定源端口号和目的端口号，然后下发给网络层。网络层会将本机地址作为源地址，获取的 IP 地址作为目的地址。然后将下发给数据链路层，数据链路层的发送需要加入通信双方的 MAC 地址，本机的 MAC 地址作为源 MAC 地址，目的 MAC 地址需要分情况处理。通过将 IP 地址与本机的子网掩码相结合，可以判断是否与请求主机在同一个子网里，如果在同一个子网里，可以使用 APR 协议获取到目的主机的 MAC 地址，如果不在一个子网里，那么请求应该转发给网关，由它代为转发，此时同样可以通过 ARP 协议来获取网关的 MAC 地址，此时目的主机的 MAC 地址应该为网关的地址。
 
-TCP 三次握手
+## TCP 三次握手
+
+
+
 重要字段
 seq(sequence number): 序列号/顺序号；用来表示 TCP 发起端向接收端发送的字节流，发起端发送数据时对此进行标记。（可以理解为发送自己的数据）
 ack(acknowledgement number): 确认号；只有 ACK 标志位存在时，确认号字段才有效。（可以理解为发送接收到的数据）
@@ -279,7 +282,7 @@ POST /getUser?id=ID HTTP/1.1
 
 URL 即请求地址，由协议(protocol)://主机(host):端口(port)/路径?参数组成。
 
-https://www.user.com:7001/getUser?id=123
+<https://www.user.com:7001/getUser?id=123>
 
 协议版本即 HTTP 版本号
 
@@ -302,16 +305,18 @@ HTTP/1.1 200 OK
 Content-Encoding: gzip
 Content-Type: text/html;charset=utf-8
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Document</title>
-</head>
-<body>
-    <p>this is http response</p>
-</body>
-</html>
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <p>this is http response</p>
+    </body>
+    </html>
+    ```
 
 响应行
 响应行包含协议版本、状态码以及状态码描述
@@ -352,16 +357,21 @@ Content-Type: text/html;charset=utf-8
 响应体
 响应体包含了服务器返回给客户端的文本信息，并不是所有响应报文都有响应体。
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Document</title>
-</head>
-<body>
-    <p>this is http response</p>
-</body>
-</html>
+    ```html
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <p>this is http response</p>
+    </body>
+    </html>
+
+    ```
+
 断开连接
 TCP 四次挥手
 重要字段
