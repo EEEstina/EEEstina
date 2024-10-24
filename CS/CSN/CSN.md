@@ -134,22 +134,44 @@
 
 ## TCP 三次握手
 
+Zenfone 10
+Zenbook S13
 
+ROG STRIX G15 => ROG ZEPHYRUS G14 => ROG GAMING CHARGER DOCK
+ROG HARPE ACE => ROG HARPE ACE MINI
+ROG FALCHION RX LOW PROFILE
 
-重要字段
-seq(sequence number): 序列号/顺序号；用来表示 TCP 发起端向接收端发送的字节流，发起端发送数据时对此进行标记。（可以理解为发送自己的数据）
-ack(acknowledgement number): 确认号；只有 ACK 标志位存在时，确认号字段才有效。（可以理解为发送接收到的数据）
-标志位(flags): 共 6 个，即 URG、ACK、PSH、RST、SYN、FIN 等。具体含义如下:
-URG: 紧急指针（urgent pointer）有效。
-ACK: 确认号有效。（为了与确认号 ack 区分开，这里采用大写，可以理解为用于确定收到了请求）。
-PSH: 接收方应该尽快将这个报文交给应用层。
-RST: 重置连接。
-SYN: 发起一个新连接。
-FIN: 释放一个连接。
-作用
-seq(序号)、ack(确认号): 用于确认数据是否准确，通信是否正常。
-标志位: 用于确认/更改连接状态。
-详情
+ROG STRIX Z790-A
+NVIDIA GeForce RTX 4090
+=> Seasonic
+NOCTUA
+    => NOCTUA NF-A12x25 PWM chromax.black.swap
+    => NOCTUA NF-A15 HS-PWM chromax.black.swap x2
+    => NOCTUA NF-A14 PWM chromax.black.swap x
+        => NOCTUA NA-SYC1 chromax.white4
+        => NOCTUA NA-SEC3
+-> Fractal Design
+EDIFIER | HKC => EDIFIER | LG
+
+### 重要字段
+
+- seq(sequence number): 序列号/顺序号；用来表示 TCP 发起端向接收端发送的字节流，发起端发送数据时对此进行标记。（可以理解为发送自己的数据）
+- ack(acknowledgement number): 确认号；只有 ACK 标志位存在时，确认号字段才有效。（可以理解为发送接收到的数据）
+- 标志位(flags): 共 6 个，即 URG、ACK、PSH、RST、SYN、FIN 等。具体含义如下:
+    - URG: 紧急指针（urgent pointer）有效。
+    - ACK: 确认号有效。（为了与确认号 ack 区分开，这里采用大写，可以理解为用于确定收到了请求）。
+    - PSH: 接收方应该尽快将这个报文交给应用层。
+    - RST: 重置连接。
+    - SYN: 发起一个新连接。
+    - FIN: 释放一个连接。
+
+#### 作用
+
+- seq(序号)、ack(确认号): 用于确认数据是否准确，通信是否正常。
+- 标志位: 用于确认/更改连接状态。
+
+### 详情
+
 image
 
 第一次握手
