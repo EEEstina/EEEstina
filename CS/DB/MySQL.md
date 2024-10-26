@@ -27,3 +27,10 @@ CROSS JOIN Departments;
 这个查询将为 Employees 表中的每个员工与 Departments 表中的每个部门生成一个组合。
 
 ④、笛卡尔积：数学中的一个概念，例如集合 A={a,b}，集合 B={0,1,2}，那么 A✖️B={<a,0>,<a,1>,<a,2>,<b,0>,<b,1>,<b,2>,}。
+
+Pixel 8 Pro
+iPad Air
+Surface Laptop 5
+
+WH-1000 XM4
+SWITCH
