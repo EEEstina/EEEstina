@@ -70,6 +70,8 @@ exists：先对外表循环，每次遍历去内表中查询匹配（内表用�
 
 ## 七、几个join的区别？（蚂蚁）
 
+![join](1.png "join")
+
 inner join：内连接，取交集
 
 left join：左连接，取左表全部，右表没有的补null
